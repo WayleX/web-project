@@ -1,51 +1,51 @@
-import { Form, Input } from 'antd'
-import React from 'react'
-import { Controller, SubmitHandler, useForm } from 'react-hook-form'
-import { useNavigate } from 'react-router-dom'
-import CustomButton from '../components/CustomButton'
-import Redirect from '../components/Redirect'
-import RequiredHandler from '../components/RequiredHandler'
-import { LoginUser } from '../interfaces/Interfaces'
-import MainLayout from '../layouts/MainLayout'
-import { Services } from '../services/Services'
+import { Form, Input } from "antd";
+import React from "react";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import CustomButton from "../components/CustomButton";
+import Redirect from "../components/Redirect";
+import RequiredHandler from "../components/RequiredHandler";
+import { LoginUser } from "../interfaces/Interfaces";
+import MainLayout from "../layouts/MainLayout";
+import { Services } from "../services/Services";
 
 export const Login = () => {
-  const [passwordVisible, setPasswordVisible] = React.useState(false)
-  const [loginResponse, setLoginResponse] = React.useState<string>('')
-  const navigate = useNavigate()
+  const [passwordVisible, setPasswordVisible] = React.useState(false);
+  const [loginResponse, setLoginResponse] = React.useState<string>("");
+  const navigate = useNavigate();
   const {
     handleSubmit,
     formState: { errors },
     reset,
     control,
   } = useForm<LoginUser>({
-    mode: 'onChange',
-  })
-  const onSubmit: SubmitHandler<LoginUser> = async data => {
-    const response: string = await Services.loginUser(data)
-    setLoginResponse(response)
-    if (response === 'True') {
-      localStorage.setItem('email', data['email'])
-      const results = '0.01,0.01,0.01,0.01,0.01,0.01'
-      localStorage.setItem('results', results)
-      navigate('/mypage')
+    mode: "onChange",
+  });
+  const onSubmit: SubmitHandler<LoginUser> = async (data) => {
+    const response: string = await Services.loginUser(data);
+    setLoginResponse(response);
+    if (response === "True") {
+      localStorage.setItem("email", data["email"]);
+      const results = "0.01,0.01,0.01,0.01,0.01,0.01";
+      localStorage.setItem("results", results);
+      navigate("/mypage");
     }
-    reset()
-  }
+    reset();
+  };
   return (
     <MainLayout>
       <Form
         onSubmitCapture={handleSubmit(onSubmit)}
-        className='max-w-[400px] absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] w-full'
+        className="max-w-[400px] absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] w-full"
       >
-        <h1 className='text-[20px] text-black dark:text-white mb-3'>Login</h1>
+        <h1 className="text-[20px] text-black dark:text-white mb-3">Login</h1>
         <Controller
-          rules={{ required: 'Email is required' }}
-          name='email'
+          rules={{ required: "Email is required" }}
+          name="email"
           control={control}
           render={({ field }) => (
             <>
-              <Input {...field} className='mb-2' placeholder='Your email' />
+              <Input {...field} className="mb-2" placeholder="Your email" />
               {errors.email && (
                 <RequiredHandler content={errors.email.message} />
               )}
@@ -53,15 +53,15 @@ export const Login = () => {
           )}
         />
         <Controller
-          rules={{ required: 'Password is required' }}
-          name='password'
+          rules={{ required: "Password is required" }}
+          name="password"
           control={control}
           render={({ field }) => (
             <>
               <Input.Password
                 {...field}
-                className='mb-2'
-                placeholder='Your password'
+                className="mb-2"
+                placeholder="Your password"
                 visibilityToggle={{
                   visible: passwordVisible,
                   onVisibleChange: setPasswordVisible,
@@ -73,13 +73,13 @@ export const Login = () => {
             </>
           )}
         />
-        <CustomButton content={'Submit'} />
-        <div className='flex items-start justify-between mt-1'>
-          <Redirect path={'/auth'} content={'Registration'} />
-          <Redirect path={'/password'} content={'Forgot password'} />
+        <CustomButton content={"Submit"} />
+        <div className="flex items-start justify-between mt-1">
+          <Redirect path={"/auth"} content={"Registration"} />
+          <Redirect path={"/password"} content={"Forgot password"} />
         </div>
         {loginResponse}
       </Form>
     </MainLayout>
-  )
-}
+  );
+};

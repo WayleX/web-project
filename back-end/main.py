@@ -61,7 +61,7 @@ async def check_code(code: _models.CheckCode):
 
 @app.get("/api/trainings/")
 async def get_trainings():
-	return {'data': data}
+	return data
 
 @app.post("/api/getname/")
 async def generate_program(email: _models.GetName):

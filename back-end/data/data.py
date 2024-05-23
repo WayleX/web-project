@@ -1,5 +1,5 @@
-data = [
-  {
+
+data =  {
     "day_1": [
       {
         "exercise_name": "Barbell Bench Press",
@@ -34,8 +34,7 @@ data = [
         "video_link": "https://www.youtube.com/embed/IB_icWRzi4E?si=Z51APlwHAwTOzWUX"
       }
     ]
-  },
-  {
+  },{
     "day_2": [
       {
         "exercise_name": "Overhead Press",
@@ -54,8 +53,7 @@ data = [
         "video_link": "https://www.youtube.com/embed/XxWcirHIwVo?si=rlsgGe0wBe02RFDV"
       }
     ]
-  },
-  {
+  },{
     "day_3": [
       {
         "exercise_name": "Push-up",
@@ -75,4 +73,3 @@ data = [
       }
     ]
   }
-]
